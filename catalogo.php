@@ -43,6 +43,7 @@
     <div class="contenido">
       <div><h1>Encuentra los mejores productos</h1></div>
       <div></div>
+      <a href=""></a>
       <div class="item">
         <?php 
         echo '<img height="400px" class="item-img" src="data:image/jpeg;base64,'.base64_encode($productos["4"]).'"/>';
