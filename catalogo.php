@@ -19,9 +19,9 @@
           array_push($productos, $row['nombre_categoria']);
         }
       
-  }else{
+    }else{
       echo '<p><em>No existen datos registrados</em></p>';
-  }
+    }
 
 ?>
 <!DOCTYPE html>
@@ -137,7 +137,8 @@
         </div>
       </div>
     </div>
-
+    <center><button class="css-button-sliding-to-left--red"><a href="catalogo_completo.php" class="mas">Mas Productos</a></button></center>
+    
   </body>
   <pag-footer></pag-footer>
 </html>
