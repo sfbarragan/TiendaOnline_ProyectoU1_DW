@@ -22,8 +22,9 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         $query = "INSERT INTO producto (nombre_producto, precio, stock, foto, id_categoria) VALUES (?, ?, ?,'$contenido',?)";
         
         if($stmt = $conn -> prepare($query)){
+            
             //envio los datos haciendo un binding
-            $stmt -> bind_param('siii', $_POST['nombreprod'], $_POST['precioprod'], $_POST['stockprod'], $_POST['categoriaprod']); 
+            $stmt -> bind_param('sdii', $_POST['nombreprod'], $_POST['precioprod'], $_POST['stockprod'], $_POST['categoriaprod']); 
 
             //Ejecutar la sentencia
             if($stmt -> execute()){
@@ -64,7 +65,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
             </div>
             <div>
                 <label>Precio</label><br>
-                <input type="number" name="precioprod" required>
+                <input type="number" step=0.01 name="precioprod" required>
             </div>
             <div>
                 <label>Cantidad en Stock</label><br>

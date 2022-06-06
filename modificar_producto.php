@@ -8,6 +8,7 @@
         //construir la consulta
         $query1 = 'SELECT p. id_producto, p.nombre_producto, p.precio, p.stock, p.foto, c.nombre_categoria FROM producto p INNER JOIN categoria c ON p.id_categoria = c.id_categoria WHERE id_producto=?';
         //preparar la sentencia 
+        
         if($stmt = $conn -> prepare($query1)){
             $stmt -> bind_param('i',  $_GET['id']);
             //ejecuto la sentencia
@@ -28,9 +29,6 @@
                 exit();
             }
             $stmt -> close();
-        }else{
-            header("location:leer_productos.php");
-            exit();
         }
     }
 
@@ -53,13 +51,12 @@
         
         
                 fclose($archivo_objetivo);
-        
                 //Construir la consulta
-                $query2 = "INSERT INTO producto (nombre_producto, precio, stock, foto, id_categoria) VALUES (?, ?, ?,'$contenido',?)";
+                $query2 = "UPDATE producto SET nombre_producto = ?, precio = ?, stock = ?, foto = '$contenido', id_categoria = ? WHERE id_producto = ?";
                 
                 if($stmt = $conn -> prepare($query2)){
                     //envio los datos haciendo un binding
-                    $stmt -> bind_param('siii', $_POST['nombreprod'], $_POST['precioprod'], $_POST['stockprod'], $_POST['categoriaprod']); 
+                    $stmt -> bind_param('sdiii', $_POST['nombreprod'], $_POST['precioprod'], $_POST['stockprod'], $_POST['categoriaprod'], $_GET['id']); 
         
                     //Ejecutar la sentencia
                     if($stmt -> execute()){
@@ -92,13 +89,13 @@
     <div class="container">
         <h2 class="title">Actualizar los datos del Producto</h2>
         <p>Llene este formulario para actualizar los datos del Producto en la base de datos</p>
-        <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post" enctype="multipart/form-data">
+        <form action="<?php echo $_SERVER['REQUEST_URI']?>" method="post" enctype="multipart/form-data">
             <div>
                 <textarea name="nombreprod" required><?php echo $nombre_producto; ?>   </textarea> 
             </div>
             <div>
                 <label>Precio</label><br>
-                <input type="number" name="precioprod" value="<?php echo $precio; ?>" size="50" required>
+                <input type="number" step=0.01 name="precioprod" value="<?php echo $precio; ?>" size="50" required>
             </div>
             <div>
                 <label>Stock</label><br>
