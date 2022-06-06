@@ -42,7 +42,6 @@
 
     <div class="contenido">
       <div><h1>Encuentra los mejores productos</h1></div>
-      <div></div>
       <a href=""></a>
       <div class="item">
         <?php 
