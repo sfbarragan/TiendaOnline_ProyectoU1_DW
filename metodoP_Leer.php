@@ -37,10 +37,8 @@
                     if($result->num_rows>0){
                         while($row = $result -> fetch_assoc()){
                             echo '<tr>';
-                            echo '<td>' . $row['id_modopago'] . '</td>';
                             echo '<td>' . $row['nombre'] .'</td>';
                             echo '<td>';
-                            echo '<a href="metodosP_actualizar.php?id='.$row['id_modopago'].'">Actualizar</a>';
                             echo '<a href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a>';
                             echo '</td>';
                             echo '</tr>';
