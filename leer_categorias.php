@@ -15,7 +15,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/base.css">
-    <link rel="stylesheet" href="CSS/productos.css">
+    <link rel="stylesheet" href="CSS/categorias.css">
     <title>Document</title>
 
 </head>
@@ -23,10 +23,10 @@
     <div class="container_tab">
         <h2 class="pag_title">Categoría</h2>
         <div class="container">
-            <button class="btn rounded"><span class="text-green"> <a href="agregar_categoria.php" class="enlace">Agregar Categoria</a></span></button>
+            <button class="btn rounded"><span class="text-green"> <a href="agregar_categorias.php" class="enlace">Agregar Categoría</a></span></button>
         </div>
-        <table class="table_categoria">
-            <thead class="titles">
+        <table class="table_products" style="width: 80%">
+            <div><thead class="titles">
                 <th>#</th>
                 <th>Nombre de la Categoría</th>
                 <th>Descripción</th>
@@ -41,8 +41,8 @@
                             echo '<td style="text-align: left;">'.$row['nombre_categoria'].'</td>';
                             echo '<td style="text-align: left;">'.$row['descripcion'].'</td>';
                             echo '<td>';
-                            echo '<a class="enlace_add" href="modificar_categoria.php?id='.$row['id_categoria'].' ">Actualizar</a><br> ';
-                            echo '<a class="enlace_add" href="eliminar_categoria.php?id='.$row['id_categoria'].' ">Eliminar</a> <br>';
+                            echo '<a class="enlace_add" href="modificar_categorias.php?id='.$row['id_categoria'].' ">Actualizar</a><br> ';
+                            echo '<a class="enlace_add" href="eliminar_categorias.php?id='.$row['id_categoria'].' ">Eliminar</a> <br>';
                             echo '</br>';
                             echo '</tr>';
                             $cont = $cont + 1;
@@ -53,9 +53,9 @@
                 
                 ?>
             </tbody>
+        </div>
+            
         </table>
     </div>
-
-    
 </body>
 </html>
