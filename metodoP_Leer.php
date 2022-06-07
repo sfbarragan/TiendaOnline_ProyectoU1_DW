@@ -23,13 +23,13 @@
 </head>
 <body>
     <div class="container_tab">
-        <h2 class="pag_title">Productos</h2>
-        <h4><a style="text-decoration: none; color: white;" href="metodosP_Agregar.php">Agregar Metodos</a></h4>
+        <h2 class="pag_title">Métodos de Pago</h2>
+        <button><a class="textoAgregar" href="metodosP_Agregar.php">Agregar Metodos</a></button> <br>
         <table class="table_products">
             <thead class="titles">
                 <tr>
-                    <th>#</th>
                     <th>Nombre</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -37,11 +37,9 @@
                     if($result->num_rows>0){
                         while($row = $result -> fetch_assoc()){
                             echo '<tr>';
-                            echo '<td>' . $row['id_modopago'] . '</td>';
                             echo '<td>' . $row['nombre'] .'</td>';
                             echo '<td>';
-                            echo '<a href="metodosP_actualizar.php?id='.$row['id_modopago'].'">Actualizar</a>';
-                            echo '<a href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a>';
+                            echo '<button><a class="textoAgregar" href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a></button>';
                             echo '</td>';
                             echo '</tr>';
                         }
