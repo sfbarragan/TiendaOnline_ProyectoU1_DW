@@ -91,9 +91,12 @@
   <title>Método de Pago</title>
   <link rel="stylesheet" href="https://content.resale.ticketmaster.com/css/generated/tmr.min.css">
   <link rel="stylesheet" href="css/factura.css">
+  <script src="JS/footer.js"></script>
+    <script src="JS/menu.js"></script>
 </head>
 
 <body>
+  <pag-menu></pag-menu>
   <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
   <div class="grid-container" style="margin-top: 20px;">
     <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -201,6 +204,7 @@
     </div>
   </div>
   </form>
+  <pag-footer></pag-footer>
 </body>
 
 </html>
