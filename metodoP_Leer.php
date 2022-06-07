@@ -39,11 +39,8 @@
                             echo '<tr>';
                             echo '<td>' . $row['nombre'] .'</td>';
                             echo '<td>';
-<<<<<<< HEAD
                             echo '<button><a class="textoAgregar" href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a></button>';
-=======
                             echo '<a href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a>';
->>>>>>> 5f360f3003f5b688996ce8b19d8055f55838b886
                             echo '</td>';
                             echo '</tr>';
                         }
