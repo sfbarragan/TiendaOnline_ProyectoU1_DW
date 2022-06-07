@@ -19,12 +19,12 @@
         @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@200;500&display=swap');
     </style>
     
-    <title>Document</title>
+    <title>Métodos de Pago</title>
 </head>
 <body>
     <div class="container_tab">
         <h2 class="pag_title">Métodos de Pago</h2>
-        <button><a class="textoAgregar" href="metodosP_Agregar.php">Agregar Metodos</a></button> <br>
+        <button><a class="textoAgregar" href="metodosP_Agregar.html">Agregar Metodos</a></button> <br>
         <table class="table_products">
             <thead class="titles">
                 <tr>
