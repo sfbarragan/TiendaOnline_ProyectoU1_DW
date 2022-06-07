@@ -8,7 +8,7 @@
         define('SERVERNAME', 'localhost');
         define('USERNAME', 'root');
         define('PASSWORD', '');
-        define('DBNAME', 'sistema-ventas');
+        define('DBNAME', 'sistema_ventas');
 
         //Conexion a la base de datos
         $conn = new mysqli(SERVERNAME, USERNAME, PASSWORD, DBNAME) or 
