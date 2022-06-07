@@ -21,6 +21,16 @@
     
     <title>Métodos de Pago</title>
 </head>
+<script type="text/javascript">
+    function Delete(){
+        var res = confirm("¿Desea eliminar el usuario?");
+        if(res == true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
 <body>
     <div class="container_tab">
         <h2 class="pag_title">Métodos de Pago</h2>
@@ -39,7 +49,7 @@
                             echo '<tr>';
                             echo '<td>' . $row['nombre'] .'</td>';
                             echo '<td>';
-                            echo '<button><a class="textoAgregar" href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a></button>';
+                            echo '<button><a class="textoAgregar" href="metodosP_eliminar.php?id='.$row['id_modopago'].'"onclick="return Delete()">Eliminar</a></button>';
                             echo '</td>';
                             echo '</tr>';
                         }
