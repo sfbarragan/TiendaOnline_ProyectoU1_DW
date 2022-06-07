@@ -1,7 +1,7 @@
 <?php
     //Recibe datos desde el formulario
     $email = $_POST['email'];
-    $pass = $_POST['password'];
+    $pass = $_POST['contrasenia'];
 
     if(isset($user)){
         //Conexion con la base de datos

@@ -29,17 +29,17 @@ form{
     text-transform: uppercase;
     text-align: center;
     color: black;
-    background-color:  #AED6F1 ;
-    border-color:  #3498DB ;
+    background-color:  #d94f5c ;
+    border-color:  #C0392B ;
     cursor: pointer;
     padding: 15px 20px;
     border-radius:22px;
 }
 
 .btn:hover {
-    background-color: #5DADE2;
+    background-color: #F2D7D5;
     color: black;
-    box-shadow: 0 8px 24px 0 #5DADE2;
+    box-shadow: 0 8px 24px 0 #F2D7D5;
     margin-left: 20px;
     border-radius:22px;
 }
