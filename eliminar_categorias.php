@@ -10,7 +10,7 @@
             $stmt -> bind_param('i',  $_GET['id']);
             //ejecuto la sentencia
             if($stmt -> execute()){
-                header ("location:leer_categoria.php");
+                header ("location:leer_categorias.php");
                 exit();
                 
             }else{
