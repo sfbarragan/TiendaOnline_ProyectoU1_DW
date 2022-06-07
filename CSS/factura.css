@@ -1,9 +1,10 @@
 body {
     background-color: #1c1d22;
-    display: flex;
+    display: block;
     align-items: center;
     justify-content: center;
 }
+
 .grid-container {
     padding: 50px 0;
     background-color: white;
