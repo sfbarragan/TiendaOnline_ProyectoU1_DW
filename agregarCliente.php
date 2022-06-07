@@ -50,7 +50,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         <div class="container">
             <form action="<?php echo $_SERVER['PHP_SELF']?>"  method="post"> <br>
                 <div>
-                    <label>Nombre Cliente</label>
+                    <label style="text-align: left;">Nombre Cliente</label>
                     <input type="text" name="nombrecli" required>
                 </div> <br>
                 <div>
