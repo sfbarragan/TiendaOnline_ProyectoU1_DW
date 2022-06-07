@@ -40,7 +40,6 @@
                             echo '<td>' . $row['nombre'] .'</td>';
                             echo '<td>';
                             echo '<button><a class="textoAgregar" href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a></button>';
-                            echo '<a href="metodosP_eliminar.php?id='.$row['id_modopago'].'">Eliminar</a>';
                             echo '</td>';
                             echo '</tr>';
                         }
