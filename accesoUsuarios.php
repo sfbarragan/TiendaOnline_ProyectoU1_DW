@@ -33,7 +33,6 @@
                 //Redirigir al mismo login
                 header('location: login.html');
             }else{
-          
                 header('location: admin.html');
             }
         }else{
