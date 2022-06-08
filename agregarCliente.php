@@ -41,6 +41,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <title>Agregar Cliente</title>
 </head>
 
+
 <body>
     <center>
         <div class="cabecera">
@@ -58,15 +59,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <input type="text" name="apellidocli" required>
                 </div> <br>
                 <div>
-                    <label>Cedula</label>
+                    <label>Direccion</label>
                     <input type="text" name="direccioncli" required>
                 </div> <br>
                 <div>
-                    <label>Telefono</label>
+                    <label>Cedula</label>
                     <input type="text" name="cedulacli" required>
                 </div> <br>
                 <div>
-                    <label>Direccion</label>
+                    <label>Telefono</label>
                     <input type="text" name="telefonocli" required>
                 </div> <br>
                 <div>
@@ -75,7 +76,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </div> <br>
                 <div>
                     <label>Contraseña</label>
-                    <input type="password" name="passwordcli" class="btn" required >
+                    <input type="password" name="passwordcli"  required >
                 </div> <br>
                 <input type="submit"  class="btn" value="Agregar">
                 <a href="login.html"><input type="sumbit" class="btn" value="Cancelar"> </a>
@@ -83,5 +84,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         </div>
     </center>
 </body>
+
 
 </html>

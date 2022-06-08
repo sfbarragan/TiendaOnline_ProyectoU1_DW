@@ -89,7 +89,6 @@ class Menu extends HTMLElement{
               <a href="">LOGIN</a>
               <ul>
                   <li><a href="login.html">Iniciar Sesión </a></li>
-                  <li><a href="modificarCliente.php"> Modificar Cliente </a></li>
               </ul>
             </li>
           </ul>
