@@ -47,11 +47,11 @@
           /* Validar si se enviaron todos los datos */
           if(isset($_POST['num_tarjeta']) && isset($_POST['mes_tarjeta']) && isset($_POST['año_tarjeta'])
           && isset($_POST['cvv_tarjeta']) && isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['direccion'])
-          && isset($_POST['cedula']) && isset($_POST['telefono']) && isset($_POST['cantidad'])){
+          && isset($_POST['cedula']) && isset($_POST['telefono']) && isset($_POST['cantidad']) 
+          && isset($_POST['modopago'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
-              $fecha = $_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
-              $query = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?,'.$fecha.', ?, ?,?)';
+              $query = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
               if($stmt = $conn->prepare($query)){
@@ -61,8 +61,9 @@
                   $subtotal = 5.20;
                   $IVA = 2.30;
                   $total = 4;
-                  $modoPago = 1;
-                  $stmt->bind_param('iiddd', $_SESSION['id_ciente'], $modoPago, $subtotal, $IVA, $total);/* se evian los string */
+                  echo $_POST['$modopago'];
+                  $fecha=$_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
+                  $stmt->bind_param('iisddd', $_SESSION['id_ciente'], $_POST['modopago'], $fecha, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
                   /* realizamos el control de la sentencia */
                   if($stmt->execute()){
@@ -75,7 +76,7 @@
                   /* cerrar la sentencia stmt */
                   $stmt->close();
               }      
-          }
+          }echo 'ERror!';
           /* despues de realizar la conexion se debera cerrar */
           $conn->close();
       }
@@ -116,14 +117,32 @@
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
             <h6>Información de la Tarjeta de Crédito</h6>
           </div>
+          <div class="grid-100 tablet-grid-100 mobile-grid-100 ap-inputs">
+            <select name="modopago" id="" required>
+                <?php
+                    require_once 'conexion.php';
+                    $query2 = 'SELECT * FROM modo_pago';
 
+                    $result2 = $conn -> query($query2);
+
+                    if($result2 ->num_rows > 0){
+                        while($row2 = $result2 -> fetch_assoc()){
+                            echo '<option value='.$row2['id_modopago'].'>'.$row2['nombre'].'</option>';
+                        }
+                    }else{
+                        echo '<p><em>No existen datos registrados</em></p>';
+                    }
+                ?>
+                
+            </select>
+          </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
             <input name="num_tarjeta" type="number" maxlength="16" required />
             <label alt="Credit Card Number" placeholder="Número de la Tarjeta de Crédito"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <select required name="mes_tarjeta"/>
+              <select name="mes_tarjeta" required>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -139,8 +158,8 @@
               </select>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <select name="año_tarjeta" type="select" />
-                <option required value="2018">2018</option>
+              <select name="año_tarjeta" type="select" required/>
+                <option value="2018">2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
                 <option value="2021">2021</option>
@@ -162,34 +181,34 @@
         </div>
         <div class="grid-50 tablet-grid-50 mobile-grid-100">
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <h6>Billing Address</h6>
+            <h6>Datos Cliente</h6>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="nombre" type="text" value="<?php echo $nombre?>" />
-              <label placeholder="Nombre"></label>
+              <input disabled name="nombre" type="text" value="<?php echo $nombre?>" />
+              <label placeholder=""></label>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="apellido" type="text" value="<?php echo $apellido?>"/>
-              <label  placeholder="Apellido"></label>
+              <input disabled name="apellido" type="text" value="<?php echo $apellido?>"/>
+              <label  placeholder=""></label>
             </div>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input name="direccion" type="text" value="<?php echo $direccion?>" />
-            <label placeholder="Dirección"></label>
+            <input disabled name="direccion" type="text" value="<?php echo $direccion?>" />
+            <label placeholder=""></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input name="cedula" type="number" maxlength="10"  value="<?php echo $cedula?>" />
-            <label  placeholder="Cédula"></label>
+            <input disabled name="cedula" type="number" maxlength="10"  value="<?php echo $cedula?>" />
+            <label  placeholder=""></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="telefono" type="number" maxlength=" 10" value="<?php echo $telefono?>" />
-              <label  placeholder="Teléfono celular"></label>
+              <input disabled name="telefono" type="number" maxlength=" 10" value="<?php echo $telefono?>" />
+              <label  placeholder=""></label>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
               <input value="1" name="cantidad" type="number" step="1" min="1" required />
-              <label placeholder="Cantidad del producto"></label>
+              <label placeholder=""></label>
             </div>
           </div>
           <br/>
