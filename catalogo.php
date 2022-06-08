@@ -7,7 +7,7 @@
 
     //ejecuto la consulta
     $result = $conn -> query($query);
-
+    
     $productos = array();
     if($result->num_rows > 0){
       while($row = $result -> fetch_assoc()){
@@ -54,7 +54,7 @@
           ?>
           <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos['0'].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos['0'].'&precio='.$productos[2].'&stock='.$productos[3].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
             ?>
             
           </p>

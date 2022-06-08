@@ -3,7 +3,7 @@
 
     session_start();
     $_SESSION['id_cliente'] = 1;
-    // Validar si se envian los datos por el método get
+
     if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
         /* Contruyo la contulata */
         $query='SELECT * FROM cliente WHERE id_cliente=?';
@@ -31,8 +31,7 @@
                 echo 'ERROR! Revise la conexion con la base de datos.';
                 exit();
             }
-        }
-        $stmt->close();
+            $stmt -> close();
         /* Tomamos el codigo realizado en el archivo leer.php */
         /* en este caso no cerramos la conecion para que se pueda actualizar la informacion */
         /* $conn->close(); */
@@ -41,34 +40,59 @@
         header("localhost: index.html");
         exit();
     }
+    }
 
-// }
+// }echo $_GET['precio'];
       if($_SERVER['REQUEST_METHOD']=='POST'){
           /* Validar si se enviaron todos los datos */
-          if(isset($_POST['num_tarjeta']) && isset($_POST['mes_tarjeta']) && isset($_POST['año_tarjeta'])
-          && isset($_POST['cvv_tarjeta']) && isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['direccion'])
-          && isset($_POST['cedula']) && isset($_POST['telefono']) && isset($_POST['cantidad']) 
-          && isset($_POST['modopago'])){
+          if(isset($_POST['num_tarjeta']) && isset($_POST['cvv_tarjeta']) && isset($_POST['cantidad'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
-              $query = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
+              $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
-              if($stmt = $conn->prepare($query)){
-                  /* enviamos los datos haciendo un binding de la variales de la tabla*/
-                  /* agregamos interger  */
-                  $precio = 2.50;
-                  $subtotal = 5.20;
-                  $IVA = 2.30;
-                  $total = 4;
-                  echo $_POST['$modopago'];
+              if($stmt = $conn->prepare($query2)){
+                  $subtotal = 50.66*$_POST['cantidad'];
+                  $IVA = $subtotal*0.12;
+                  $total = $subtotal+$IVA;
+                  $id_modopago = $_POST['modopago'];
                   $fecha=$_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
-                  $stmt->bind_param('iisddd', $_SESSION['id_ciente'], $_POST['modopago'], $fecha, $subtotal, $IVA, $total);/* se evian los string */
+                  $stmt->bind_param('iisddd', $_SESSION['id_ciente'], $id_modopago, $fecha, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
                   /* realizamos el control de la sentencia */
                   if($stmt->execute()){
-                      header("location:detalleFactura.php");
-                      exit();
+                      $qfactura='SELECT * FROM factura WHERE id_factura = (SELECT MAX(id_factura) FROM factura)';
+                      if($stmt = $conn -> prepare($qfactura)){
+                        //ejecuto la sentencia
+                        if($stmt -> execute()){
+                            $result = $stmt -> get_result();
+                            if($result -> num_rows == 1){
+                                $row = $result -> fetch_array(MYSQLI_ASSOC);
+                                $id_factura = $row['id_factura'];
+
+                                $query3 = 'INSERT INTO detalle(id_factura, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)';
+                                /* Prepara la sentencia */
+                                /* enviamos la consulta preparada */
+                                $_GET['id_producto'] = 4;
+                                $total = round($total,2);
+                                $cantidad = intval(($_POST['cantidad']));
+                                if($stmt = $conn->prepare($query2)){
+                                    $stmt->bind_param('iiid', $id_factura, $_GET['id_producto'], $cantidad, $total);/* se evian los string */
+                                    /* ejecutamos la sentencia */
+                                    /* realizamos el control de la sentencia */
+                                    if($stmt->execute()){
+                                      header('location:detalleFactura.php');
+                                    }
+                                  }
+                                exit();
+                            }else{
+                                echo 'Error! No existen resultados';
+                            }
+                        }else{
+                            echo 'Error de conexión con la base de datos';
+                            exit();
+                        }
+                    }
                   }else{
                       /* en caso de haber un error en la conexion */
                       echo "Error! intente mas tarde.";
@@ -76,7 +100,7 @@
                   /* cerrar la sentencia stmt */
                   $stmt->close();
               }      
-          }echo 'ERror!';
+          }
           /* despues de realizar la conexion se debera cerrar */
           $conn->close();
       }
@@ -96,10 +120,10 @@
   <link rel="stylesheet" href="https://content.resale.ticketmaster.com/css/generated/tmr.min.css">
 
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
-    <link rel="stylesheet" href="CSS/base.css" />
-    <link rel="stylesheet" href="css/factura.css">
+  <link rel="stylesheet" href="CSS/base.css" />
+  <link rel="stylesheet" href="css/factura.css">
   <script src="JS/footer.js"></script>
-    <script src="JS/menu.js"></script>
+  <script src="JS/menu.js"></script>
 </head>
 
 <body>
@@ -115,7 +139,7 @@
       <div class="grid-100 tablet-grid-100 mobile-grid-100 ap-inputs">
         <div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-bottom: 20px;">
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <h6>Información de la Tarjeta de Crédito</h6>
+            <h6>Información de la Tarjeta de Crédito o PayPal</h6>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 ap-inputs">
             <select name="modopago" id="" required>
@@ -206,9 +230,17 @@
               <input disabled name="telefono" type="number" maxlength=" 10" value="<?php echo $telefono?>" />
               <label  placeholder=""></label>
             </div>
-            <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input value="1" name="cantidad" type="number" step="1" min="1" required />
-              <label placeholder=""></label>
+            <div class="grid-25 tablet-grid-100 mobile-grid-100">
+              <?php
+                echo '<input name="cantidad" type="number" value="1" max="'.$_GET['stock'].'" step="1" min="1"/>'
+              ?>
+              <label alt="cantidad" placeholder="Cantidad"></label>
+            </div>
+            <div class="grid-25 tablet-grid-100 mobile-grid-100">
+              <?php
+                echo '<input disabled type="number" name="id_producto" value="'.$_GET['id'].'"/>'
+              ?>
+              <label alt="id_producto" placeholder=""></label>
             </div>
           </div>
           <br/>

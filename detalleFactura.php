@@ -1,3 +1,70 @@
+<?php
+    if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
+      /* Contruyo la contulata */
+      $query='SELECT * FROM cliente WHERE id_cliente=?';
+      /* Preparar la sentencia */
+      if($stmt=$conn->prepare($query)){
+          $stmt->bind_param('i', $_SESSION['id_cliente']);
+          /* ejecuto la sentencia */
+          if($stmt->execute()){
+              $result=$stmt->get_result();
+              /* veo que si el numero de filas es igual a uno */
+              if($result->num_rows==1){
+                  /* obtenemos todos lo datos que estamo consultando */
+                  $row=$result->fetch_array
+                      (MYSQLI_ASSOC);
+                      $nombre = $row['nombre_cliente'];
+                      $apellido = $row['apellido_cliente'];
+                      $direccion = $row['direccion'];
+                      $cedula = $row['cedula'];
+                      $telefono = $row['telefono'];
+              }else{
+                  echo 'Error! No existen resultados';
+                  exit();
+              }
+          }else{
+              echo 'ERROR! Revise la conexion con la base de datos.';
+              exit();
+          }
+          $stmt -> close();
+      /* Tomamos el codigo realizado en el archivo leer.php */
+      /* en este caso no cerramos la conecion para que se pueda actualizar la informacion */
+      /* $conn->close(); */
+  }else{
+      /* En caso de no pasar datos realizamos redireccionamiento hacia el index.php */
+      header("localhost: index.html");
+      exit();
+  }
+}
+
+      if(isset($_GET['id']) && !empty(trim($_GET['id']))){
+        //construir la consulta
+        $query1 = 'SELECT p. id_producto, p.nombre_producto, p.precio, p.stock, p.foto, c.nombre_categoria FROM producto p INNER JOIN categoria c ON p.id_categoria = c.id_categoria WHERE id_producto=?';
+        //preparar la sentencia 
+        
+        if($stmt = $conn -> prepare($query1)){
+            $stmt -> bind_param('i',  $_GET['id']);
+            //ejecuto la sentencia
+            if($stmt -> execute()){
+                $result = $stmt -> get_result();
+                if($result -> num_rows == 1){
+                    $row = $result -> fetch_array(MYSQLI_ASSOC);
+                    $nombre_producto = $row['nombre_producto'];
+                    $precio = $row['precio'];
+                    $stock = $row['stock'];
+                    $foto = $row['foto'];
+                    $categoria = $row['nombre_categoria'];
+                }else{
+                    echo 'Error! No existen resultados';
+                }
+            }else{
+                echo 'Error de conexión con la base de datos';
+                exit();
+            }
+            $stmt -> close();
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,8 +97,8 @@
           </tr>
           <tr class="intro">
             <td class="">
-              Hello, Philip Brooks.<br>
-              Thank you for your order.
+              Hola, <?php echo $nombre.' '.$apellido?>.<br>
+              Gracias por tu compra.
             </td>
             <td class="text-right">
               <span class="num">Order #00302</span><br>
@@ -82,25 +149,6 @@
             </td>
           </tr>
         </table>
-        
-        <section class="additional-info">
-        <div class="row">
-          <div class="columns">
-            <h5>Billing Information</h5>
-            <p>Philip Brooks<br>
-              134 Madison Ave.<br>
-              New York NY 00102<br>
-              United States</p>
-          </div>
-          <div class="columns">
-            <h5>Payment Information</h5>
-            <p>Credit Card<br>
-              Card Type: Visa<br>
-              &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; &bull;&bull;&bull;&bull; 1234
-              </p>
-          </div>
-        </div>
-        </section>
       </div>
     </section>
     </div>
