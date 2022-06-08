@@ -39,14 +39,39 @@ class Menu extends HTMLElement{
         .menu li:not(:last-child) {
           margin-right: 30px;
         }
+          
+        .men li a{
+          font-size: 22px;
+          color: #777;
+          text-decoration: none;
+          transition: all 0.45s;
+        }
 
-        @-webkit-keyframes line {
+        .men > li {
+          float: left;
+        }
+
+        .men li ul {
+          display: none;
+          position: absolute;
+          min-width: 140px;
+
+        }
+
+        .men li:hover > ul {
+          display: block;
+
+        }
+        ul, ol{
+          list-style: none;
+          }
+      @-webkit-keyframes line {
           0% {
             background-position-x: 390px;
           }
         }
 
-        @keyframes line {
+      @keyframes line {
           0% {
             background-position-x: 390px;
           }
@@ -58,7 +83,16 @@ class Menu extends HTMLElement{
           <li><a href="index.html">Home</a></li>
           <li><a href="catalogo.php">Catálogo</a></li>
           <li><a href="nosotros.html">Nosotros</a></li>
-          <li><a href="login.html">LOGIN</a></li>
+          <li>
+          <ul class="men">
+            <li>
+              <a href="">LOGIN</a>
+              <ul>
+                  <li><a href="login.html">Iniciar Sesión </a></li>
+                  <li><a href="modificarCliente.php"> Modificar Cliente </a></li>
+              </ul>
+            </li>
+          </ul>
         </ul>
       </nav>`
     }
