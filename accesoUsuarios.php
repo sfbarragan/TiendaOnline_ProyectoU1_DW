@@ -10,6 +10,9 @@
 
         //Consulta para verificar si el usuario existe
         $query = "SELECT * FROM cliente WHERE email = '$email' AND contrasenia = '$pass'";
+ 
+
+        session_start();
 
         //Ejecutar consulta
         $resultado = mysqli_query($conn, $query) or die(mysqli_connect_errno());

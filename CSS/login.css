@@ -1,19 +1,21 @@
-
 form{
-    background-color: #1c1d22  ;
+    color :rgba(66, 65, 65, 0.479) ;
     border-radius: 35px;
     padding: 20px;
     justify-content: center;
-    color:#F2D7D5;
+    color:#333333;
     margin: 0 auto;
+    text-align: right;
     width:400px;
 }
 
 .container{
-    width: 100px;
+    width: 500px;
     align-items: center;
-    margin-left: 500px;
+    margin-left: 35%;
     text-align: center;
+    background-color: aliceblue;
+    border-radius: 35px;
 }
 
 .btn{
@@ -42,8 +44,8 @@ form{
 input{
     background: none;
     border: 2px solid #D7BDE2;
-    color: #d3d3d3;
-    text-align: center;
+    color: rgb(133, 131, 131);
+    text-align: left;   
     justify-content: center;
     padding: 10px 5px;
     border-radius: 20px;

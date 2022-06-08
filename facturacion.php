@@ -1,45 +1,47 @@
 <?php
     require_once 'conexion.php';
- 
-    // // Validar si se envian los datos por el método get
-    // if(isset($_GET['id']) && !empty(trim($_GET['id']))){
-    //     /* Contruyo la contulata */
-    //     $query='SELECT * FROM producto WHERE id_producto=?';
-    //     /* Preparar la sentencia */
-    //     if($stmt=$conn->prepare($query)){
-    //         $stmt->bind_param('i', $_GET['id']);
-    //         /* ejecuto la sentencia */
-    //         if($stmt->execute()){
-    //             $result=$stmt->get_result();
-    //             /* veo que si el numero de filas es igual a uno */
-    //             if($result->num_rows==1){
-    //                 /* obtenemos todos lo datos que estamo consultando */
-    //                 $row=$result->fetch_array
-    //                     (MYSQLI_ASSOC);
-    //                     $nombre = $row['nombre_producto'];
-    //                     $precio = $row['precio'];
-    //                     $stock = $row['stock'];      
-    //             }else{
-    //                 echo 'Error! No existen resultados';
-    //                 exit();
-    //             }
-    //         }else{
-    //             echo 'ERROR! Revise la conexion con la base de datos.';
-    //             exit();
-    //         }
-    //     }
-    //     $stmt->close();
-    //     /* Tomamos el codigo realizado en el archivo leer.php */
-    //     /* en este caso no cerramos la conecion para que se pueda actualizar la informacion */
-    //     /* $conn->close(); */
-    // }else{
-    //     /* En caso de no pasar datos realizamos redireccionamiento hacia el index.php */
-    //     header("localhost: index.html");
-    //     exit();
-    // }
-    /* 2. Tomamos lod datos editados y los actualizamos en la base de datos */
-    /* Agregamos el codigo que realizado en el archivo agregar.ph */
-    /* Tomar los datos editados y actualizamos en la base */
+
+    session_start();
+    $_SESSION['id_cliente'] = 1;
+    // Validar si se envian los datos por el método get
+    if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
+        /* Contruyo la contulata */
+        $query='SELECT * FROM cliente WHERE id_cliente=?';
+        /* Preparar la sentencia */
+        if($stmt=$conn->prepare($query)){
+            $stmt->bind_param('i', $_SESSION['id_cliente']);
+            /* ejecuto la sentencia */
+            if($stmt->execute()){
+                $result=$stmt->get_result();
+                /* veo que si el numero de filas es igual a uno */
+                if($result->num_rows==1){
+                    /* obtenemos todos lo datos que estamo consultando */
+                    $row=$result->fetch_array
+                        (MYSQLI_ASSOC);
+                        $nombre = $row['nombre_cliente'];
+                        $apellido = $row['apellido_cliente'];
+                        $direccion = $row['direccion'];
+                        $cedula = $row['cedula'];
+                        $telefono = $row['telefono'];
+                }else{
+                    echo 'Error! No existen resultados';
+                    exit();
+                }
+            }else{
+                echo 'ERROR! Revise la conexion con la base de datos.';
+                exit();
+            }
+        }
+        $stmt->close();
+        /* Tomamos el codigo realizado en el archivo leer.php */
+        /* en este caso no cerramos la conecion para que se pueda actualizar la informacion */
+        /* $conn->close(); */
+    }else{
+        /* En caso de no pasar datos realizamos redireccionamiento hacia el index.php */
+        header("localhost: index.html");
+        exit();
+    }
+
 // }
       if($_SERVER['REQUEST_METHOD']=='POST'){
           /* Validar si se enviaron todos los datos */
@@ -48,22 +50,23 @@
           && isset($_POST['cedula']) && isset($_POST['telefono']) && isset($_POST['cantidad'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
-              $query = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
+              $fecha = $_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
+              $query = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?,'.$fecha.', ?, ?,?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
               if($stmt = $conn->prepare($query)){
                   /* enviamos los datos haciendo un binding de la variales de la tabla*/
                   /* agregamos interger  */
-                //   $precio = 2.50;
-                //   $subtotal = $_POST['cantidad']*($precio);
-                //   $IVA = ($subtotal)*0.12;
-                //   $total ($subtotal)+($IVA);
-                  $fecha = $_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
-                  $stmt->bind_param('iisddd', 1, 1, $fecha, 15.99, 2.50, 17.44);/* se evian los string */
+                  $precio = 2.50;
+                  $subtotal = 5.20;
+                  $IVA = 2.30;
+                  $total = 4;
+                  $modoPago = 1;
+                  $stmt->bind_param('iiddd', $_SESSION['id_ciente'], $modoPago, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
                   /* realizamos el control de la sentencia */
                   if($stmt->execute()){
-                      header("location: index.php");
+                      header("location:detalleFactura.php");
                       exit();
                   }else{
                       /* en caso de haber un error en la conexion */
@@ -77,7 +80,7 @@
           $conn->close();
       }
 //   }else{
-//     echo '<script language="javascript">alert("Error! No hay productos disponibles.");window.location.href="index.html"</script>';
+//     echo '<script language="javascript">alert("Error! No hay productos disponibles.");window.location.href="index.html"</>';
 //   }
 // ?>
 
@@ -104,9 +107,10 @@
     <div class="grid-container" style="margin-top: 20px;">
       <div class="grid-100 tablet-grid-100 mobile-grid-100">
         <div class="grid-35 tablet-grid-100 mobile-grid-100">
-          <h4 class="heading">Confirme su Tarjeta de Crédito</h4>
+          <h4 class="heading">Confirme su Método de Pago</h4>
         </div>
       </div>
+      
       <div class="grid-100 tablet-grid-100 mobile-grid-100 ap-inputs">
         <div class="grid-50 tablet-grid-50 mobile-grid-100" style="margin-bottom: 20px;">
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
@@ -119,35 +123,33 @@
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <select name="mes_tarjeta" type="select" />
-              <option disabled selected value="">Seleccione el mes</option>
-              <option selected value="01">01</option>
-              <option value="02">02</option>
-              <option value="03">03</option>
-              <option value="04">04</option>
-              <option value="05">05</option>
-              <option value="06">06</option>
-              <option value="07">07</option>
-              <option value="08">08</option>
-              <option value="09">09</option>
-              <option value="10">10</option>
-              <option value="11">11</option>
-              <option value="12">12</option>
+              <select required name="mes_tarjeta"/>
+                <option value="01">01</option>
+                <option value="02">02</option>
+                <option value="03">03</option>
+                <option value="04">04</option>
+                <option value="05">05</option>
+                <option value="06">06</option>
+                <option value="07">07</option>
+                <option value="08">08</option>
+                <option value="09">09</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
               </select>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
               <select name="año_tarjeta" type="select" />
-              <option disabled selected value="">Seleccione el año</option>
-              <option selected value="2018">2018</option>
-              <option value="2019">2019</option>
-              <option value="2020">2020</option>
-              <option value="2021">2021</option>
-              <option value="2022">2022</option>
-              <option value="2023">2023</option>
-              <option value="2024">2024</option>
-              <option value="2025">2025</option>
-              <option value="2026">2026</option>
-              <option value="2027">2027</option>
+                <option required value="2018">2018</option>
+                <option value="2019">2019</option>
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+                <option value="2024">2024</option>
+                <option value="2025">2025</option>
+                <option value="2026">2026</option>
+                <option value="2027">2027</option>
               </select>
             </div>
           </div>
@@ -155,9 +157,6 @@
             <div class="grid-40 tablet-grid-40 mobile-grid-90">
               <input name="cvv_tarjeta" type="number" maxlength="4" required />
               <label alt="CVV" placeholder="CVV"></label>
-            </div>
-            <div class="grid-100 tablet-grid-10 mobile-grid-10 info-icon">
-              <img src="img/tarjeta.png" alt="Tarjeta de Crédito">
             </div>
           </div>
         </div>
@@ -167,25 +166,25 @@
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="nombre" type="text" required />
+              <input name="nombre" type="text" value="<?php echo $nombre?>" />
               <label placeholder="Nombre"></label>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="apellido" type="text" required />
+              <input name="apellido" type="text" value="<?php echo $apellido?>"/>
               <label  placeholder="Apellido"></label>
             </div>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input name="direccion" type="text" required />
+            <input name="direccion" type="text" value="<?php echo $direccion?>" />
             <label placeholder="Dirección"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input name="cedula" type="number" maxlength="10"  required />
+            <input name="cedula" type="number" maxlength="10"  value="<?php echo $cedula?>" />
             <label  placeholder="Cédula"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input name="telefono" type="number" maxlength=" 10" required />
+              <input name="telefono" type="number" maxlength=" 10" value="<?php echo $telefono?>" />
               <label  placeholder="Teléfono celular"></label>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
