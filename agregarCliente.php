@@ -75,7 +75,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </div> <br>
                 <div>
                     <label>Contraseña</label>
-                    <input type="password" name="passwordcli" class="btn" required >
+                    <input type="password" name="passwordcli"  required >
                 </div> <br>
                 <input type="submit"  class="btn" value="Agregar">
                 <a href="login.html"><input type="sumbit" class="btn" value="Cancelar"> </a>
