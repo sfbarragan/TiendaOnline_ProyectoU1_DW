@@ -59,15 +59,15 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </div> <br>
                 <div>
                     <label>Direccion</label>
-                    <input type="text" name="telefonocli" required>
+                    <input type="text" name="direccionli" required>
                 </div> <br>
                 <div>
                     <label>Cedula</label>
-                    <input type="text" name="direccioncli" required>
+                    <input type="text" name="cedulacli" required>
                 </div> <br>
                 <div>
                     <label>Telefono</label>
-                    <input type="text" name="cedulacli" required>
+                    <input type="text" name="telefonocli" required>
                 </div> <br>
             
                 <div>
