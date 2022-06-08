@@ -1,7 +1,5 @@
 <?php
     require_once 'conexion.php';
-
-
     //1. Consultar los datos y mostrarlos en los Input
     //validar si se envian los datos por el metodo  get 
     if(isset($_GET['id']) && !empty(trim($_GET['id']))){
