@@ -3,9 +3,6 @@ body {
     font-weight: 400;
     color: #322d28;
 }
-header.top-bar h1 {
-    font-family: 'Montserrat', sans-serif;
-}
 main {
     margin-top: 4rem;
     min-height: calc(100vh - 107px);
@@ -16,6 +13,7 @@ main .inner-container {
 }
 table.invoice {
     background: #fff;
+
 }
 table.invoice .num {
     font-weight: 200;

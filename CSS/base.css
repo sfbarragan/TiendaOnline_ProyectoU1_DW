@@ -17,3 +17,9 @@ html {
   font-size: 30px;
   box-shadow: 30px 16px rgb(245, 245, 245);
 }
+.expanded{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 0 50px;
+}

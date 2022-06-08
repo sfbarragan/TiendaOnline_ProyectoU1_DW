@@ -8,23 +8,22 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="CSS/base.css" />
+    <link rel="stylesheet" href="CSS/detalleFactura.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/js/foundation.js"></script>
+    <script src="JS/footer.js"></script>
+    <script src="JS/menu.js"></script>
 </head>
 <body>
-<div class="row expanded">
+<pag-menu></pag-menu>
+<div  class="row expanded">
   <main class="columns">
     <div class="inner-container">
-    <header class="row align-center">
-        <a class="button hollow secondary"><i class="ion ion-chevron-left"></i>Volver al Catálogo</a>
-      </header>
     <section class="row align-center">
       <div class="callout large invoice-container">
         <table class="invoice">
           <tr class="header">
-            <td class="">
-              <img src="http://www.travelerie.com/wp-content/uploads/2014/04/PlaceholderLogoBlue.jpg" alt="Company Name" />
-            </td>
             <td class="align-right">
               <h2>Detalle Factura</h2>
             </td>
@@ -106,6 +105,8 @@
     </section>
     </div>
   </main>
+
 </div>
+<pag-footer></pag-footer>
 </body>
 </html>
