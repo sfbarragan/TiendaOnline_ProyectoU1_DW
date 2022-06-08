@@ -41,6 +41,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
     <title>Agregar Cliente</title>
 </head>
 
+
 <body>
     <center>
         <div class="cabecera">
@@ -59,7 +60,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                 </div> <br>
                 <div>
                     <label>Direccion</label>
-                    <input type="text" name="direccionli" required>
+                    <input type="text" name="direccioncli" required>
                 </div> <br>
                 <div>
                     <label>Cedula</label>
@@ -69,7 +70,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <label>Telefono</label>
                     <input type="text" name="telefonocli" required>
                 </div> <br>
-            
                 <div>
                     <label>Correo</label>
                     <input type="text" name="emailcli" required>
@@ -84,5 +84,6 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
         </div>
     </center>
 </body>
+
 
 </html>
