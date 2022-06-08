@@ -20,6 +20,16 @@
 
 </head>
 <body>
+<script type="text/javascript">
+    function Delete(){
+        var res = confirm("¿Desea eliminar el usuario?");
+        if(res == true){
+            return true;
+        }else{
+            return false;
+        }
+    }
+</script>
     <div class="container_tab">
         <h2 class="pag_title">Categoría</h2>
         <div class="container">
@@ -42,7 +52,7 @@
                             echo '<td style="text-align: left;">'.$row['descripcion'].'</td>';
                             echo '<td>';
                             echo '<a class="enlace_add" href="modificar_categorias.php?id='.$row['id_categoria'].' ">Actualizar</a><br> ';
-                            echo '<a class="enlace_add" href="eliminar_categorias.php?id='.$row['id_categoria'].' ">Eliminar</a> <br>';
+                            echo '<a class="enlace_add" href="eliminar_categorias.php?id='.$row['id_categoria'].' "onclick="return Delete()" ">Eliminar</a> <br>';
                             echo '</br>';
                             echo '</tr>';
                             $cont = $cont + 1;

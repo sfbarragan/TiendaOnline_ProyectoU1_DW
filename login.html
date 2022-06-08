@@ -5,33 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/login.css">
-    <script src="JS/login.js" type="module"></script>
+    <link rel="stylesheet" href="CSS/base.css">
     <title> Login </title>
 </head>
+
 <body>
     <br><br><br><br>
     <div class="container">
-        <form action="accesoUsuarios.php" method="post" id="formEjemplo">
+        <form action="accesoUsuarios.php"  method="post" >
             <table>
                 <caption>
                     <h1>Login</h1>
                 </caption>
                 <tr>
                     <td>Usuario:</td>
-                    <td><input type="text" name="username" id="username" class="btn" required></td>
+                    <td><input type="text" name="email" id="username" class="btn" placeholder="Email" ></td>
                 </tr>
                 <tr>
                     <td>Contraseña:</td>
-                    <td><input type="password" name="password" id="password" class="btn" required></td>
+                    <td><input type="password" name="contrasenia" id="password" class="btn" placeholder="********" ></td>
                 </tr>
                     <tr>  </tr>
 
             </table>
-                <td align="center"><input type="submit" name="submit" value="Ingresar" id="ingreso1" class="btn"></td>    <br>
-                <td> ¿Aún no tienes una cuenta? </td>  <br>
-                <td align="center"><input type="submit" name="submit" value="Registrate"  class="btn"></td>      
-
+            <center>
+                <td><input type="submit" name="submit" value="Ingresar" id="ingreso1" class="btn"></td>    <br>
+               
+            </center>
         </form> 
+        <td> ¿Aún no tienes una cuenta? </td>  <br>
+        <a href="agregarCliente.php"><td align="center"><input type="submit" name="submit" value="Registrate"  class="btn"></td></a>    
     </div>
+    <script src="Js/login.js" type="module"></script>
 </body>
 </html>

@@ -1,2 +1,2 @@
-const btn1 = alert("Bienvenido a mi pagina")
+const btn1 = alert("Ingrese correo y/o contraseña correctamente")
 export{btn1};
