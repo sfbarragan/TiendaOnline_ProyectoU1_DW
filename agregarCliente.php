@@ -58,6 +58,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <input type="text" name="apellidocli" required>
                 </div> <br>
                 <div>
+                    <label>Direccion</label>
+                    <input type="text" name="telefonocli" required>
+                </div> <br>
+                <div>
                     <label>Cedula</label>
                     <input type="text" name="direccioncli" required>
                 </div> <br>
@@ -65,10 +69,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
                     <label>Telefono</label>
                     <input type="text" name="cedulacli" required>
                 </div> <br>
-                <div>
-                    <label>Direccion</label>
-                    <input type="text" name="telefonocli" required>
-                </div> <br>
+            
                 <div>
                     <label>Correo</label>
                     <input type="text" name="emailcli" required>
