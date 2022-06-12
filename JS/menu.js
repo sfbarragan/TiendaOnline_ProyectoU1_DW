@@ -82,7 +82,7 @@ class Menu extends HTMLElement{
         <ul class="menu">
           <li><a href="index.php">Home</a></li>
           <li><a href="catalogo.php">Catálogo</a></li>
-          <li><a href="nosotros.html">Nosotros</a></li>
+          <li><a href="nosotros.php">Nosotros</a></li>
           <li>
           <ul class="men">
             <li>

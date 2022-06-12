@@ -1,6 +1,7 @@
 
 <?php
     require_once 'conexion.php';
+    session_start();
 
     //consulta de datos
     $query = "SELECT p.id_producto, p.nombre_producto, p.precio, p.stock, p.foto, c.nombre_categoria FROM producto p INNER JOIN categoria c ON p.id_categoria = c.id_categoria";
@@ -35,10 +36,22 @@
     <link rel="stylesheet" href="CSS/catalogo.css">
     <script src="JS/footer.js"></script>
     <script src="JS/menu.js"></script>
+    <link rel="stylesheet" href="CSS/usuario.css">
     <title>Catalogo</title>
   </head>
   <body>
-    <pag-menu></pag-menu>
+    <div class="menu_container">
+      <div class="menu">
+        <pag-menu></pag-menu> 
+      </div>
+      
+        <?php
+          if (isset($_SESSION['nombre_cliente'])) {
+            echo '<div class="usuario"><p>Bienvenido, '.$_SESSION['nombre_cliente'].'</p></div> ';
+          }
+        ?>
+      
+    </div>
 
     <div class="contenido">
       <div><h1>Encuentra los mejores productos</h1></div>

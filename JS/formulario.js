@@ -58,7 +58,7 @@ class Formulario extends HTMLElement{
         
         <div id="cont">
            <form class="btn">
-            <h1>Formulario</h1>
+            <h1>Contactanos</h1>
             <div class="half left cf">
               <input type="text" id="input-nombre" placeholder="Nombre" />
               <input type="text" id="input-apellido" placeholder="Apellido" />

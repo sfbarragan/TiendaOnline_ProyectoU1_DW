@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,10 +12,22 @@
     <script src="JS/footer.js"></script>
     <script src="JS/menu.js"></script>
     <script src="JS/formulario.js"></script>
+    <link rel="stylesheet" href="CSS/usuario.css">
     <title>Nosotros</title>
 </head>
 <body>
-    <pag-menu></pag-menu>
+    <div class="menu_container">
+      <div class="menu">
+        <pag-menu></pag-menu> 
+      </div>
+      
+        <?php
+          if (isset($_SESSION['nombre_cliente'])) {
+            echo '<div class="usuario"><p>Bienvenido, '.$_SESSION['nombre_cliente'].'</p></div> ';
+          }
+        ?>
+      
+    </div>
     <boton-formulario></boton-formulario>
 </body>
 <pag-footer></pag-footer>
