@@ -17,7 +17,7 @@ class Menu extends HTMLElement{
         }
 
         .menu li {
-          width: 125px;
+          width: 150px;
           height: 50px;
           transition: background-position-x 0.9s linear;
           text-align: center;
@@ -80,7 +80,7 @@ class Menu extends HTMLElement{
 
       <nav>
         <ul class="menu">
-          <li><a href="index.html">Home</a></li>
+          <li><a href="index.php">Home</a></li>
           <li><a href="catalogo.php">Catálogo</a></li>
           <li><a href="nosotros.html">Nosotros</a></li>
           <li>
@@ -89,6 +89,7 @@ class Menu extends HTMLElement{
               <a href="">LOGIN</a>
               <ul>
                   <li><a href="login.html">Iniciar Sesión </a></li>
+                  <li><a href="cerrar_sesion.php">Cerrar Sesión </a></li>
               </ul>
             </li>
           </ul>

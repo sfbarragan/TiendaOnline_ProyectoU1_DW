@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -12,10 +16,23 @@
     <script src="JS/footer.js"></script>
     <script src="JS/menu.js"></script>
     <script src="JS/contacto.js"></script>
+    <link rel="stylesheet" href="CSS/usuario.css">
   </head>
 
   <body>
-    <pag-menu></pag-menu>
+    <div class="menu_container">
+      <div class="menu">
+        <pag-menu></pag-menu> 
+      </div>
+      
+        <?php
+          if (isset($_SESSION['nombre_cliente'])) {
+            echo '<div class="usuario"><p>Bienvenido, '.$_SESSION['nombre_cliente'].'</p></div> ';
+          }
+        ?>
+      
+    </div>
+    
     <template id="acordionGallery">
       <style>
         .gallery_conteiner {

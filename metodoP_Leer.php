@@ -1,4 +1,10 @@
 <?php
+    session_start();
+
+    //validar si se esta ingresando directamente sin loggueo
+    if(!$_SESSION){
+        header("location:index.php");
+    }
     require_once 'conexion.php';
     //1. Consultar los datos y mostrarlos
     //consulta de datos
@@ -59,6 +65,8 @@
                 ?>
             </tbody>
         </table>
+        <button class="btn_salir"><a href="cerrar_sesion.php" class="enlace">Salir</a></button>
+        <button class="btn_salir"><a href="admin.php" class="enlace">Regresar</a></button>
     </div>
 </body>
 </html>

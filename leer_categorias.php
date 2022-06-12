@@ -1,4 +1,10 @@
 <?php
+    session_start();
+
+    //validar si se esta ingresando directamente sin loggueo
+    if(!$_SESSION){
+        header("location:index.php");
+    }
     require_once 'conexion.php';
 
     //consulta de datos
@@ -15,7 +21,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/base.css">
-    <link rel="stylesheet" href="CSS/categorias.css">
+    <link rel="stylesheet" href="CSS/productos.css">
     <title>Document</title>
 
 </head>
@@ -66,6 +72,8 @@
         </div>
             
         </table>
+        <button class="btn_salir"><a href="cerrar_sesion.php" class="enlace">Salir</a></button>
+        <button class="btn_salir"><a href="admin.php" class="enlace">Regresar</a></button>
     </div>
 </body>
 </html>

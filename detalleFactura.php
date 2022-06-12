@@ -34,7 +34,7 @@
       /* $conn->close(); */
   }else{
       /* En caso de no pasar datos realizamos redireccionamiento hacia el index.php */
-      header("localhost: index.html");
+      header("localhost: index.php");
       exit();
   }
 }

@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+//validar si se esta ingresando directamente sin loggueo
+if(!$_SESSION){
+    header("location:index.php");
+}
+
 require_once 'conexion.php';
 
 //Controlar si se estan enviando datos por el POST
