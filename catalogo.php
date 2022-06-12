@@ -70,7 +70,7 @@
           ?>
            <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos[6].'&precio='.$productos[8].'&stock='.$productos[9].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos[6].'&precio='.$productos[8].'&stock='.$productos[9].'" class="enlaces" id="item1">'.$productos[7]. ", USD$ " .$productos[8].'</a>';
             ?>
           </p>
         </div>
@@ -85,7 +85,7 @@
           ?>
            <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos[12].'&precio='.$productos[14].'&stock='.$productos[15].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos[12].'&precio='.$productos[14].'&stock='.$productos[15].'" class="enlaces" id="item1">'.$productos[13]. ", USD$ " .$productos[14].'</a>';
             ?> 
           </p>
         </div>
@@ -100,7 +100,7 @@
           ?>
            <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos[18].'&precio='.$productos[20].'&stock='.$productos[21].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos[18].'&precio='.$productos[20].'&stock='.$productos[21].'" class="enlaces" id="item1">'.$productos[19]. ", USD$ " .$productos[20].'</a>';
             ?>          
           </p>
         </div>
@@ -115,7 +115,7 @@
           ?>
           <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos[24].'&precio='.$productos[26].'&stock='.$productos[27].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos[24].'&precio='.$productos[26].'&stock='.$productos[27].'" class="enlaces" id="item1">'.$productos[25]. ", USD$ " .$productos[26].'</a>';
             ?>     
           </p>
         </div>
@@ -130,7 +130,7 @@
           ?>
           <p>
             <?php 
-            echo '<a href="facturacion.php?id='.$productos[30].'&precio='.$productos[32].'&stock='.$productos[33].'" class="enlaces" id="item1">'.$productos[1]. ", USD$ " .$productos[2].'</a>';
+            echo '<a href="facturacion.php?id='.$productos[30].'&precio='.$productos[32].'&stock='.$productos[33].'" class="enlaces" id="item1">'.$productos[31]. ", USD$ " .$productos[32].'</a>';
             ?>     
           </p>
         </div>

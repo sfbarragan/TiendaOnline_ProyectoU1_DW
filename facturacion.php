@@ -1,7 +1,8 @@
 <?php
   require_once 'conexion.php';
   session_start();
-  $_SESSION['id_producto']=$_GET['id'];
+
+  $id_producto = $_GET['id'];
 
   if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
         /* Contruyo la contulata */
@@ -72,11 +73,11 @@
                                 $query3 = 'INSERT INTO detalle(id_factura, id_producto, cantidad, precio) VALUES (?, ?, ?, ?)';
                                 /* Prepara la sentencia */
                                 /* enviamos la consulta preparada */
-                                $_GET['id_producto'] = 4;
                                 $total = round($total,2);
                                 $cantidad = intval(($_POST['cantidad']));
+                                
                                 if($stmt = $conn->prepare($query3)){
-                                    $stmt->bind_param('iiid', $id_factura, $_GET['id_producto'], $cantidad, $total);/* se evian los string */
+                                    $stmt->bind_param('iiid', $id_factura, $id_producto, $cantidad, $total);/* se evian los string */
                                     /* ejecutamos la sentencia */
                                     /* realizamos el control de la sentencia */
                                     if($stmt->execute()){

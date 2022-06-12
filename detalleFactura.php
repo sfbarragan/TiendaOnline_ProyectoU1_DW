@@ -97,6 +97,9 @@
             <td class="align-right">
               <h2 style="text-align:left">Detalle Factura</h2>
             </td>
+            <td>
+
+            </td>
           </tr>
           <tr class="intro">
             <td class="">
@@ -105,7 +108,7 @@
             </td>
             <td class="text-right">
               <span class="num">Orden #00<?php echo $id_detalleFactura?></span><br>
-              <?phpecho $fecha?>
+              <?php echo $fecha?>
             </td>
           </tr>
           <tr class="details">
