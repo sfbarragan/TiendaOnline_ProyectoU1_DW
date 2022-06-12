@@ -10,7 +10,7 @@ body, html {
     padding: 50px 25px 0 25px;
     background-color: white;
     min-width: calc(100vw - 300px);
-    max-width: calc(100vw - 400px);
+    max-width: auto;
     min-height: calc(100vh - 300px);
     max-height: auto;
     padding-bottom: 50px;
@@ -96,9 +96,4 @@ p.moreinfo {
     width: 200px;
     left: -100px;
     top: 30px;
-}
-
-form {
-    width: auto;
-    margin-bottom: 120px;
 }

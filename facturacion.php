@@ -117,19 +117,22 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Método de Pago</title>
-
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
+
   <link rel="stylesheet" href="CSS/base.css" />
   <link rel="stylesheet" href="CSS/facturaMain.css">
   <link rel="stylesheet" href="CSS/factura.css">
   <script src="JS/footer.js"></script>
   <script src="JS/menu.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
 </head>
 
 <body>
   <pag-menu></pag-menu>
   <form method="post">
-    <div class="grid-container" style="margin-top: 20px;">
+    <div class="grid-container" style="margin-bottom: 100px;">
       <div class="grid-100 tablet-grid-100 mobile-grid-100">
         <div class="grid-35 tablet-grid-100 mobile-grid-100">
           <h4 class="heading">Confirme su Método de Pago</h4>
@@ -159,46 +162,19 @@
             </select>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input name="num_tarjeta" type="number" maxlength="16" required />
+            <input required class="cc-number-input" name="num_tarjeta" id="cc" type="text" data-inputmask="'mask': '9999 9999 9999 9999'"/>
             <label alt="Número de Tarjeta de Crédito" placeholder="Número de la Tarjeta de Crédito"></label>
           </div>
-          <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-            <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <select name="mes_tarjeta" required>
-              <option value="Mes" disabled>Seleccione el Mes de Expiración</option>
-                <option value="01">01</option>
-                <option value="02">02</option>
-                <option value="03">03</option>
-                <option value="04">04</option>
-                <option value="05">05</option>
-                <option value="06">06</option>
-                <option value="07">07</option>
-                <option value="08">08</option>
-                <option value="09">09</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-              </select>
-            </div>
-            <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <select name="año_tarjeta" type="select" required/>
-                <option value="Mes" disabled>Seleccione el Año de Expiración</option>
-                <option value="2018">2018</option>
-                <option value="2019">2019</option>
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-                <option value="2024">2024</option>
-                <option value="2025">2025</option>
-                <option value="2026">2026</option>
-                <option value="2027">2027</option>
-              </select>
+          <div class="grid-75 tablet-grid-50 mobile-grid-50 grid-parent">
+            <div class="grid-75 tablet-grid-100 mobile-grid-100"> 
+              <input required name="fecha_expiracion" type="text" id="date" data-inputmask="'alias': 'date'"/>
+              <label alt="Fecha de expiración" placeholder="Fecha de expiración"></label>
             </div>
           </div>
-          <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
-            <div class="grid-40 tablet-grid-40 mobile-grid-90">
-              <input name="cvv_tarjeta" type="number" maxlength="4" required />
+          <div class="grid-25 tablet-grid-50 mobile-grid-50 grid-parent">
+            <div class="grid-100 tablet-grid-40 mobile-grid-90">
+              <input name="cvv_tarjeta" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                maxlength = "3" />
               <label alt="CVV" placeholder="CVV"></label>
             </div>
           </div>
@@ -258,6 +234,13 @@
     </div>
   </form>
   <pag-footer></pag-footer>
+  <script>
+    $(":input").inputmask();
+    Inputmask("9{2}[-]9[-]9{2}", {
+                    placeholder: "-",
+                    greedy: false
+                }).mask('#date');
+  </script>
 </body>
 
 </html>
