@@ -1,7 +1,6 @@
 <?php
   require_once 'conexion.php';
   session_start();
-
   if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
     /* Contruyo la contulata */
     $query='SELECT * FROM cliente WHERE id_cliente=?';
@@ -18,7 +17,6 @@
                     (MYSQLI_ASSOC);
                     $nombre_cliente = $row['nombre_cliente'];
                     $apellido = $row['apellido_cliente'];
-
             }else{
                 echo 'Error! No existen resultados';
                 exit();
@@ -153,7 +151,7 @@
           </tr>
         </table>
         <input type="button" class="print" value="Imprimir" />
-        <a href="catalogo.php">
+         <a href="catalogo.php">
             <input type="button" style="background-color: #c00;" value="Cancelar" />
             </a>
       </div>
