@@ -1,4 +1,6 @@
 <?php
+  require_once 'conexion.php';
+  session_start();
     if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
       /* Contruyo la contulata */
       $query='SELECT * FROM cliente WHERE id_cliente=?';
@@ -72,9 +74,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle Factura</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700|Montserrat:300,400,700">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.1/css/foundation-flex.min.css">
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="CSS/base.css" />
     <link rel="stylesheet" href="CSS/detalleFactura.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -85,7 +85,7 @@
 <body>
 <pag-menu></pag-menu>
 <div  class="row expanded">
-  <main class="columns">
+  <main class="columns" style="margin:0 0 50px 0">
     <div class="inner-container">
     <section class="row align-center">
       <div class="callout large invoice-container">

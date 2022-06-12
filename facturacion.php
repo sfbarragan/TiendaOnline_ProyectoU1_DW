@@ -47,7 +47,7 @@
           if(isset($_POST['num_tarjeta']) && isset($_POST['cvv_tarjeta']) && isset($_POST['precio_producto']) && isset($_POST['cantidad'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
-              $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
+              $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?, ?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
               if($stmt = $conn->prepare($query2)){
@@ -56,7 +56,7 @@
                   $total = $subtotal+$IVA;
                   $id_modopago = $_POST['modopago'];
                   $fecha=$_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
-                  $stmt->bind_param('iisddd', $_SESSION['id_ciente'], $id_modopago, $fecha, $subtotal, $IVA, $total);/* se evian los string */
+                  $stmt->bind_param('iisddd', $_SESSION['id_cliente'], $id_modopago, $fecha, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
                   /* realizamos el control de la sentencia */
                   if($stmt->execute()){
@@ -75,7 +75,7 @@
                                 $_GET['id_producto'] = 4;
                                 $total = round($total,2);
                                 $cantidad = intval(($_POST['cantidad']));
-                                if($stmt = $conn->prepare($query2)){
+                                if($stmt = $conn->prepare($query3)){
                                     $stmt->bind_param('iiid', $id_factura, $_GET['id_producto'], $cantidad, $total);/* se evian los string */
                                     /* ejecutamos la sentencia */
                                     /* realizamos el control de la sentencia */
@@ -127,7 +127,7 @@
 
 <body>
   <pag-menu></pag-menu>
-  <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
+  <form method="post">
     <div class="grid-container" style="margin-top: 20px;">
       <div class="grid-100 tablet-grid-100 mobile-grid-100">
         <div class="grid-35 tablet-grid-100 mobile-grid-100">

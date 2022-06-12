@@ -4,15 +4,18 @@ body {
     color: #322d28;
 }
 main {
-    margin-top: 4rem;
+    /* margin-top: 4rem; */
     min-height: calc(100vh - 107px);
 }
 main .inner-container {
     max-width: 800px;
     margin: 0 auto;
 }
+main .columns {
+    margin-top: 0;
+}
 table.invoice {
-    background: #fff;
+    background: black;
 
 }
 table.invoice .num {
