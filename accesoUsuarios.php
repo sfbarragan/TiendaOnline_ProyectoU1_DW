@@ -32,16 +32,17 @@
                 //Redirigir al mismo login
                 header('location: login.html');
             }else{
+                session_start();
+
+                $_SESSION['id_user'] = $fila['id_user'];
                 header('location: admin.php');
             }
         }else{
-            session_unset();
-            session_destroy();
-
             session_start();
 
             $_SESSION['id_cliente'] = $fila['id_cliente'];
-            header('location: index.html');
+            $_SESSION['nombre_cliente'] = $fila['nombre_cliente'];
+            header('location: index.php');
         }
     }else {
 

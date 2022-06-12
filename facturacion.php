@@ -36,7 +36,7 @@
         /* $conn->close(); */
     }else{
         /* En caso de no pasar datos realizamos redireccionamiento hacia el index.php */
-        header("localhost: index.html");
+        header("localhost: index.php");
         exit();
     }
   }
@@ -47,7 +47,7 @@
           if(isset($_POST['num_tarjeta']) && isset($_POST['cvv_tarjeta']) && isset($_POST['precio_producto']) && isset($_POST['cantidad'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
-              $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?, ?)';
+              $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
               if($stmt = $conn->prepare($query2)){
@@ -55,6 +55,7 @@
                   $IVA = $subtotal*0.12;
                   $total = $subtotal+$IVA;
                   $id_modopago = $_POST['modopago'];
+
                   $fecha = date('Y-m-d', time());  
                   $stmt->bind_param('iisddd', $_SESSION['id_cliente'], $id_modopago, $fecha, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
@@ -75,7 +76,7 @@
                                 $_GET['id_producto'] = 4;
                                 $total = round($total,2);
                                 $cantidad = intval(($_POST['cantidad']));
-                                if($stmt = $conn->prepare($query3)){
+                                if($stmt = $conn->prepare($query2)){
                                     $stmt->bind_param('iiid', $id_factura, $_GET['id_producto'], $cantidad, $total);/* se evian los string */
                                     /* ejecutamos la sentencia */
                                     /* realizamos el control de la sentencia */
@@ -104,7 +105,7 @@
           $conn->close();
       }
 //   }else{
-//     echo '<script language="javascript">alert("Error! No hay productos disponibles.");window.location.href="index.html"</>';
+//     echo '<script language="javascript">alert("Error! No hay productos disponibles.");window.location.href="index.php"</>';
 //   }
 // ?>
 
@@ -127,7 +128,7 @@
 
 <body>
   <pag-menu></pag-menu>
-  <form method="post">
+  <form action="<?php echo $_SERVER['PHP_SELF']?>" method="post">
     <div class="grid-container" style="margin-top: 20px;">
       <div class="grid-100 tablet-grid-100 mobile-grid-100">
         <div class="grid-35 tablet-grid-100 mobile-grid-100">

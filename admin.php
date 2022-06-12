@@ -1,3 +1,14 @@
+<?php
+        //Iniciar la sesión
+        session_start();
+
+        //validar si se esta ingresando directamente sin loggueo
+        if(!$_SESSION){
+            header("location:index.php");
+        }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,7 +37,7 @@
     </div>
     <div class="box-2">
         <div class="btn btn-two">
-          <span><a href="index.html">Regresar</a></span>
+          <span><a href="cerrar_sesion.php  ">Salir</a></span>
         </div>
       </div>
   </body>
