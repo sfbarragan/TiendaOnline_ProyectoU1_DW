@@ -1,10 +1,9 @@
 <?php
-    require_once 'conexion.php';
+  require_once 'conexion.php';
+  session_start();
+  $_SESSION['id_producto']=$_GET['id'];
 
-    session_start();
-    $_SESSION['id_cliente'] = 1;
-
-    if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
+  if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
         /* Contruyo la contulata */
         $query='SELECT * FROM cliente WHERE id_cliente=?';
         /* Preparar la sentencia */
@@ -40,19 +39,19 @@
         header("localhost: index.html");
         exit();
     }
-    }
+  }
 
 // }echo $_GET['precio'];
       if($_SERVER['REQUEST_METHOD']=='POST'){
           /* Validar si se enviaron todos los datos */
-          if(isset($_POST['num_tarjeta']) && isset($_POST['cvv_tarjeta']) && isset($_POST['cantidad'])){
+          if(isset($_POST['num_tarjeta']) && isset($_POST['cvv_tarjeta']) && isset($_POST['precio_producto']) && isset($_POST['cantidad'])){
               /* construir la consulta para la base de datos */
               /* enviamos los datos de manera anonima para preparar la sentencia y hacer un binding */
               $query2 = 'INSERT INTO factura(id_cliente, id_modopago, fecha, subtotal, IVA, total) VALUES (?, ?, ?, ?, ?,?)';
               /* Prepara la sentencia */
               /* enviamos la consulta preparada */
               if($stmt = $conn->prepare($query2)){
-                  $subtotal = 50.66*$_POST['cantidad'];
+                  $subtotal = floatval($_POST['precio_producto'])*intval($_POST['cantidad']);
                   $IVA = $subtotal*0.12;
                   $total = $subtotal+$IVA;
                   $id_modopago = $_POST['modopago'];
@@ -117,11 +116,11 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Método de Pago</title>
-  <link rel="stylesheet" href="https://content.resale.ticketmaster.com/css/generated/tmr.min.css">
 
   <link rel="icon" type="image/x-icon" href="img/favicon.ico" />
   <link rel="stylesheet" href="CSS/base.css" />
-  <link rel="stylesheet" href="css/factura.css">
+  <link rel="stylesheet" href="CSS/facturaMain.css">
+  <link rel="stylesheet" href="CSS/factura.css">
   <script src="JS/footer.js"></script>
   <script src="JS/menu.js"></script>
 </head>
@@ -143,12 +142,11 @@
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 ap-inputs">
             <select name="modopago" id="" required>
+              <option value="Método de Pago" disabled>Seleccione el Método de Pago</option>
                 <?php
                     require_once 'conexion.php';
                     $query2 = 'SELECT * FROM modo_pago';
-
                     $result2 = $conn -> query($query2);
-
                     if($result2 ->num_rows > 0){
                         while($row2 = $result2 -> fetch_assoc()){
                             echo '<option value='.$row2['id_modopago'].'>'.$row2['nombre'].'</option>';
@@ -156,17 +154,17 @@
                     }else{
                         echo '<p><em>No existen datos registrados</em></p>';
                     }
-                ?>
-                
+                ?>   
             </select>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
             <input name="num_tarjeta" type="number" maxlength="16" required />
-            <label alt="Credit Card Number" placeholder="Número de la Tarjeta de Crédito"></label>
+            <label alt="Número de Tarjeta de Crédito" placeholder="Número de la Tarjeta de Crédito"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
               <select name="mes_tarjeta" required>
+              <option value="Mes" disabled>Seleccione el Mes de Expiración</option>
                 <option value="01">01</option>
                 <option value="02">02</option>
                 <option value="03">03</option>
@@ -183,6 +181,7 @@
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
               <select name="año_tarjeta" type="select" required/>
+                <option value="Mes" disabled>Seleccione el Año de Expiración</option>
                 <option value="2018">2018</option>
                 <option value="2019">2019</option>
                 <option value="2020">2020</option>
@@ -209,38 +208,38 @@
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input disabled name="nombre" type="text" value="<?php echo $nombre?>" />
-              <label placeholder=""></label>
+              <input readonly name="nombre" type="text" value="<?php echo $nombre?>" />
+              <label alt="Nombre" placeholder="Nombre"></label>
             </div>
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input disabled name="apellido" type="text" value="<?php echo $apellido?>"/>
-              <label  placeholder=""></label>
+              <input readonly name="apellido" type="text" value="<?php echo $apellido?>"/>
+              <label alt="Apellido" placeholder="Apellido"></label>
             </div>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input disabled name="direccion" type="text" value="<?php echo $direccion?>" />
-            <label placeholder=""></label>
+            <input readonly name="direccion" type="text" value="<?php echo $direccion?>" />
+            <label alt="Dirección" placeholder="Dirección"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100">
-            <input disabled name="cedula" type="number" maxlength="10"  value="<?php echo $cedula?>" />
-            <label  placeholder=""></label>
+            <input readonly name="cedula" type="number" maxlength="10"  value="<?php echo $cedula?>" />
+            <label alt="Cédula" placeholder="Cédula"></label>
           </div>
           <div class="grid-100 tablet-grid-100 mobile-grid-100 grid-parent">
             <div class="grid-50 tablet-grid-100 mobile-grid-100">
-              <input disabled name="telefono" type="number" maxlength=" 10" value="<?php echo $telefono?>" />
-              <label  placeholder=""></label>
+              <input readonly name="telefono" type="tel" maxlength=" 10" value="<?php echo $telefono?>" />
+              <label alt="Teléfono" placeholder="Teléfono"></label>
             </div>
             <div class="grid-25 tablet-grid-100 mobile-grid-100">
               <?php
                 echo '<input name="cantidad" type="number" value="1" max="'.$_GET['stock'].'" step="1" min="1"/>'
               ?>
-              <label alt="cantidad" placeholder="Cantidad"></label>
+              <label alt="Cantidad" placeholder="Cantidad"></label>
             </div>
             <div class="grid-25 tablet-grid-100 mobile-grid-100">
               <?php
-                echo '<input disabled type="number" name="id_producto" value="'.$_GET['id'].'"/>'
+                echo '<input readonly type="number" name="precio_producto" value="'.$_GET['precio'].'"/>'
               ?>
-              <label alt="id_producto" placeholder=""></label>
+              <label alt="Precio" placeholder="Precio"></label>
             </div>
           </div>
           <br/>

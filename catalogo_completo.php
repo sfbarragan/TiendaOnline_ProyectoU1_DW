@@ -38,7 +38,7 @@
                     echo '<div class="item-text">';
                     echo '<h3>'.$row['nombre_categoria'].'</h3>';
                     echo '<p>';
-                    echo '<a href="facturacion.php?id='.$row['id_producto'].'" class="enlaces" id="item1">'.$row['nombre_producto']. ", USD$ " .$row['precio'].'</a>';
+                    echo '<a href="facturacion.php?id='.$row['id_producto'].'&precio='.$row['precio'].'&stock='.$row['stock'].'" class="enlaces" id="item1">'.$row['nombre_producto']. ", USD$ " .$row['precio'].'</a>';
                     echo '</p>';
                     echo '</div>';
                     echo '</div>';

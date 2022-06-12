@@ -15,14 +15,9 @@
         //Almacenar el resultado de la consulta en un arreglo y tomo el siguiente
         $fila = mysqli_fetch_array($resultado);
 
-        session_start();
-
-        $_SESSION['idusuario'] = $fila['id_ciente'];
-
-
-
         //Controlar si llegan los datos
         if($fila['id_cliente'] == null){
+            
             //Consulta para verificar si el usuario existe
             $query2 = "SELECT * FROM admins WHERE email = '$email' AND contra = '$pass'";
 
@@ -40,7 +35,12 @@
                 header('location: admin.php');
             }
         }else{
-            $_SESSION['idusuario'] = $fila['id_cliente'];
+            session_unset();
+            session_destroy();
+
+            session_start();
+
+            $_SESSION['id_cliente'] = $fila['id_cliente'];
             header('location: index.html');
         }
     }else {

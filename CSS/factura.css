@@ -12,7 +12,12 @@ body, html {
     min-width: calc(100vw - 300px);
     max-width: calc(100vw - 400px);
     min-height: calc(100vh - 300px);
-    max-height: calc(100vh - 400px);
+    max-height: auto;
+    padding-bottom: 50px;
+}
+.grid-container grid-100{
+    display: flex;
+    flex-wrap: wrap;
 }
 .heading {
     margin-bottom: 20px;
@@ -34,10 +39,6 @@ p.moreinfo {
    }
 }
 
-img {
-    display: flexbox;
-    width: 400px;
-}
 .ap-inputs select {
     color: #a9a9a9;
     font-size: 13px;
