@@ -55,7 +55,7 @@
                   $IVA = $subtotal*0.12;
                   $total = $subtotal+$IVA;
                   $id_modopago = $_POST['modopago'];
-                  $fecha=$_POST['año_tarjeta'].'-'.$_POST['mes_tarjeta'].'-01';
+                  $fecha = date('Y-m-d', time());  
                   $stmt->bind_param('iisddd', $_SESSION['id_cliente'], $id_modopago, $fecha, $subtotal, $IVA, $total);/* se evian los string */
                   /* ejecutamos la sentencia */
                   /* realizamos el control de la sentencia */
@@ -80,7 +80,7 @@
                                     /* ejecutamos la sentencia */
                                     /* realizamos el control de la sentencia */
                                     if($stmt->execute()){
-                                      header('location:detalleFactura.php');
+                                      header("location:detalleFactura.php?cantidad=".$cantidad);
                                     }
                                   }
                                 exit();
