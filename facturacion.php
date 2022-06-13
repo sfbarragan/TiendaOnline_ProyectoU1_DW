@@ -1,7 +1,9 @@
 <?php
   require_once 'conexion.php';
   session_start();
-
+  if(!$_SESSION){
+    header("location:index.php");
+  }
   $id_producto = $_GET['id'];
 
   if(isset($_SESSION['id_cliente']) && !empty(trim($_SESSION['id_cliente']))){
